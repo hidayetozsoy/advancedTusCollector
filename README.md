@@ -15,6 +15,8 @@ This tool collects all your TUS from multiple accounts and sends them to Binance
 
 - You should set your **private keys** and **addresses** on config.py under **src/utils** directory.
 
+- **!!** Do not forget to set your **MAIN ADDRESS** and **BINANCE ADDRESS**. 
+
 ## Get Your Address
 - Open **Metamask** extension
 
