@@ -7,7 +7,7 @@ from utils.funcs import *
 def main():
     tusBalance = checkSwimmerBalance(MAIN_ADDRESS)
     fee = getCrosschainFee()
-    bridgeAmount = tusBalance - fee - AMOUNT_LEFT_IN_SWIMMER_ACCOUNTS
+    bridgeAmount = int(tusBalance - fee - AMOUNT_LEFT_IN_SWIMMER_ACCOUNTS)
     if bridgeAmount <= 0:
         raise Exception("insufficient balance")
     dataInput = getDataInput(int(bridgeAmount))
