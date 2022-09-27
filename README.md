@@ -1,5 +1,5 @@
 # Advanced Tus Collector
-This tool collects all your TUS from multiple accounts and sends them to Binance as AVAX.
+A more advanced version of my other project Tus Collector (https://github.com/hidayetozsoy/tusCollector) which collects TUS from side addresses to main address. This tool can bridge TUS from Swimmer Network to Avalanche Network and swaps TUS to AVAX. Then sends them to Binance address.
 
 ## How It Works
 
@@ -36,6 +36,6 @@ This tool collects all your TUS from multiple accounts and sends them to Binance
 - Write your **Metamask password** to the area and click **Confirm**. You will see your private key.
 
 - Copy your **private key**.
-- Wait for GIF below.
+- Wait for the GIF below.
 
 ![howToGetPrivateKey](https://user-images.githubusercontent.com/60021484/189709264-af5cb80f-b286-4d10-9720-f3bd27db6f59.gif)
