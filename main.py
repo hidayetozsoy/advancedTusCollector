@@ -7,6 +7,7 @@ from src.utils.config import *
 from src.utils.funcs import *
 
 def main():
+    checkAddresses()
     if input(f"\n All the money will sent to this address: {BINANCE_AVAX_C_ADDRESS}\n Do you agree? (Y/n):") != "Y":
         printn("process declined.")
         return

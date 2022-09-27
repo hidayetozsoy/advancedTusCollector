@@ -10,23 +10,29 @@ from config import *
 def Hex(num):
     return str(hex(num))[2:]
 
+
 def zeroHex(num):
     return Hex(num).rjust(64,"0")
+
 
 def printn(text):
     print("\n",text)
 
+
 def printLine():
     printn(40*"-")
+
 
 def sleepy(secs):
     printn(f"Sleeping {secs} secs...")
     time.sleep(secs)
 
+
 def getGasPrice():
     gasPriceUrl = "https://api.debank.com/chain/gas_price_dict_v2?chain=avax"
     gasPriceFast = int(requests.get(gasPriceUrl).json()["data"]["fast"]["price"])
     return gasPriceFast
+
 
 #return the given address's balance
 def checkSwimmerBalance(address):
@@ -35,12 +41,14 @@ def checkSwimmerBalance(address):
     balance = w3.eth.getBalance(address)
     return balance
 
+
 #return the given address's balance
 def checkAvaxBalance(address):
     w3 = Web3(Web3.HTTPProvider(AVAX_NETWORK_URL))
     w3.middleware_onion.inject(geth_poa_middleware, layer=0)
     balance = w3.eth.getBalance(address)
     return balance
+
 
 #sends transaction from given address with given dataInput, sends type2 EIP-1559 transaction.
 def sendSwimmerTx(address, to, dataInput="", value=0, sleepTime=10):
@@ -72,6 +80,7 @@ def sendSwimmerTx(address, to, dataInput="", value=0, sleepTime=10):
     if sleepTime >0:
         sleepy(sleepTime)
 
+
 #sends transaction from given address with given dataInput, sends type2 EIP-1559 transaction.
 def sendAvaxTx(address, to, dataInput="", value=0, sleepTime=10):
     w3 = Web3(Web3.HTTPProvider(AVAX_NETWORK_URL))
@@ -102,6 +111,7 @@ def sendAvaxTx(address, to, dataInput="", value=0, sleepTime=10):
     if sleepTime >0:
         sleepy(sleepTime)
 
+
 def seperate(data):
     data = data[10:]
     parameters = list()
@@ -109,6 +119,7 @@ def seperate(data):
         parameters.append(data[:64])
         data = data[64:]
     return parameters
+
 
 def getDataInput(tusAmount):
     bridgeTusAmount = zeroHex(tusAmount)
@@ -147,6 +158,7 @@ def getCrosschainFee():
         feeList.append(fee)
     return median(feeList)
 
+
 def waitForNativeTransfers():
     passedTime = 0
     while True:
@@ -158,6 +170,7 @@ def waitForNativeTransfers():
                 isOk = False
         if isOk:
             break
+
 
 def waitForBridge(bridgeAmount):
     waitTime = 15*60
@@ -189,10 +202,12 @@ def waitForSwap(amountOutMin):
             return True
         sleepy(sleepTime)
 
+
 def getTusAmount(address):
     tusApi = f"https://api.snowtrace.io/api?module=account&action=tokenbalance&contractaddress=0xf693248F96Fe03422FEa95aC0aFbBBc4a8FdD172&address={address}&tag=latest&apikey="
     tusAmount = int(requests.get(tusApi).json()["result"])
     return tusAmount
+
 
 def getAvaxAmount(address, rounded=False):
     avaxApi = f"https://api.snowtrace.io/api?module=account&action=balance&address={address}&tag=latest&apikey="
@@ -201,10 +216,12 @@ def getAvaxAmount(address, rounded=False):
         return round(avaxAmount/pow(10,18),3)
     return avaxAmount
 
+
 def getAvaxPrice():
     url = "https://api.dexscreener.com/latest/dex/pairs/avalanche/0xf4003f4efbe8691b60249e6afbd307abe7758adb"
     price = requests.get(url).json()["pair"]["priceUsd"]
     return float(price)
+
 
 def getTusPrice():
     url = "https://api.dexscreener.com/latest/dex/pairs/avalanche/0x565d20bd591b00ead0c927e4b6d7dd8a33b0b319"
@@ -218,5 +235,24 @@ def getAmountOutMinTusToAvax(tusAmount):
     amountOutMin = ((tusAmount*tusPrice)/avaxPrice) * ((100-SLIPPAGE)/100)
     return int(amountOutMin)
 
+
+def isAddressValid(address):
+    w3 = Web3(Web3.HTTPProvider(SWIMMER_NETWORK_URL))
+    return w3.utils.isAddress(address)
+
+
+def checkAddresses():
+    if not isAddressValid(MAIN_ADDRESS):
+        raise Exception("Main address is not valid. Please check.")
+
+    if not isAddressValid(BINANCE_AVAX_C_ADDRESS):
+        raise Exception("Binance address is not valid. Please check.")
+
+    for address in SIDE_ADDRESSES:
+        if not isAddressValid(address):
+            raise Exception(f"Address {address} is not valid. Please check.")
+
+
 if __name__ == "__main__":
-    print(getAvaxAmount("0x804e7499bc3204B01E8e2D5144a5F9826Db2f991"))
+    print(isAddressValid("0x804e7499bc3204B01E8e2D5144a5F9826Db2f991"))
+    # print(getAvaxAmount("0x804e7499bc3204B01E8e2D5144a5F9826Db2f991"))
