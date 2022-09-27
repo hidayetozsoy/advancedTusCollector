@@ -5,6 +5,7 @@ from utils.consts import *
 from utils.funcs import *
 
 def main():
+    
     global account
     try:
         for address in SIDE_ADDRESSES:
