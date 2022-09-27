@@ -24,5 +24,6 @@ def main():
         sendAvaxToBinance(amountOutMin)
     print("process is done")
 
+
 if __name__ == "__main__":
     main()

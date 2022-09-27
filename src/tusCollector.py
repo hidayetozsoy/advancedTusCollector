@@ -5,7 +5,6 @@ from utils.consts import *
 from utils.funcs import *
 
 def main():
-    
     global account
     try:
         for address in SIDE_ADDRESSES:
@@ -18,5 +17,6 @@ def main():
     except Exception as e:
         printn(e)
         
+
 if __name__ == "__main__":
     main()

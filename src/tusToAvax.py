@@ -21,6 +21,6 @@ def main(tusAmount):
     sendAvaxTx(address=MAIN_ADDRESS, to=TRADER_JOE_CONTRACT_ADDRESS, dataInput=dataInput)   
     return amountOutMin
 
+
 if __name__ == "__main__":
     main()
-
