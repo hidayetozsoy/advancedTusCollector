@@ -16,6 +16,7 @@ def main():
     sendSwimmerTx(address=MAIN_ADDRESS, to=LAYERZERO_BRIDGE_CONTRACT_ADDRESS, dataInput=dataInput, value=value)
     return bridgeAmount
 
+
 if __name__ == "__main__":
     main()
     # print(getCrosschainFee())
