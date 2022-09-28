@@ -238,7 +238,7 @@ def getAmountOutMinTusToAvax(tusAmount):
 
 def isAddressValid(address):
     w3 = Web3(Web3.HTTPProvider(SWIMMER_NETWORK_URL))
-    return w3.utils.isAddress(address)
+    return w3.isAddress(address)
 
 
 def checkAddresses():
