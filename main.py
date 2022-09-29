@@ -22,7 +22,7 @@ def main():
         raise Exception("something happened during the bridge")
     if waitForSwap(amountOutMin):
         sendAvaxToBinance(amountOutMin)
-    print("process is done")
+    printn("process is done")
 
 
 if __name__ == "__main__":
