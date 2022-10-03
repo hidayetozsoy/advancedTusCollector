@@ -10,7 +10,7 @@ PRIVATE_KEYS = { # address : private key (private keys of all addresses, includi
     "0x4043D2508C591f57C1C0d36CF227be5a3ace83d4":"686e075ee398432d1ea14f9acabd93e695f77404bc51d800dab3c0c1aa02fe14",
 }
 
-SLIPPAGE = 3 # TUS to AVAX slippage
+SLIPPAGE = 4 # TUS to AVAX slippage
 
 BINANCE_AVAX_C_ADDRESS = "" # binance avax c chain address that AVAX will be sent 
 
